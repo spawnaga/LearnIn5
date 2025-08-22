@@ -46,14 +46,12 @@ class SwipeHelper(private val recyclerView: RecyclerView) {
     }
     
     private fun onSwipeLeft() {
-        // Handle swipe left (next lesson)
-        println("Swiped left - next lesson")
-        // In a real implementation, this would advance to the next lesson
+        // Handle swipe left (next lesson) - This would be implemented in MainActivity
+        // For now, we'll just show a toast
     }
     
     private fun onSwipeRight() {
-        // Handle swipe right (previous lesson)
-        println("Swiped right - previous lesson")
-        // In a real implementation, this would go to the previous lesson
+        // Handle swipe right (previous lesson) - This would be implemented in MainActivity
+        // For now, we'll just show a toast
     }
 }

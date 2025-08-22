@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -58,9 +59,12 @@ class MainActivity : AppCompatActivity() {
         // Create a simple adapter for now
         lessonAdapter = LessonAdapter(emptyList()) { lesson ->
             // Handle lesson click
-            println("Clicked on lesson: ${lesson.title}")
+            Toast.makeText(this, "Opening lesson: ${lesson.title}", Toast.LENGTH_SHORT).show()
         }
         recyclerView.adapter = lessonAdapter
+        
+        // Setup swipe detection
+        SwipeHelper(recyclerView)
     }
     
     private fun loadSampleData() {
@@ -115,35 +119,12 @@ class MainActivity : AppCompatActivity() {
         
         // Demonstrate AI curation
         val curatedLessons = AIContentProvider.generateCuratedLessons(currentUser, sampleLessons)
-        println("Curated lessons for ${currentUser.name}:")
-        curatedLessons.forEach { lesson ->
-            val relevanceScore = AIContentProvider.calculateRelevanceScore(currentUser, lesson)
-            println("- ${lesson.title} (${lesson.category}) - Score: ${String.format("%.2f", relevanceScore)}")
-        }
         
         // Update the adapter with sample lessons
         lessonAdapter = LessonAdapter(curatedLessons) { lesson ->
             // Handle lesson click
-            println("Clicked on lesson: ${lesson.title}")
+            Toast.makeText(this, "Opening lesson: ${lesson.title}", Toast.LENGTH_SHORT).show()
         }
         recyclerView.adapter = lessonAdapter
-    }
-    
-    // Method to navigate to next lesson with animation
-    private fun goToNextLesson() {
-        if (currentLessonIndex < (lessonAdapter.itemCount - 1)) {
-            currentLessonIndex++
-            // In a real implementation, this would animate the transition
-            println("Navigating to lesson $currentLessonIndex")
-        }
-    }
-    
-    // Method to navigate to previous lesson with animation
-    private fun goToPreviousLesson() {
-        if (currentLessonIndex > 0) {
-            currentLessonIndex--
-            // In a real implementation, this would animate the transition
-            println("Navigating to lesson $currentLessonIndex")
-        }
     }
 }
