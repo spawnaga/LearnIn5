@@ -4,12 +4,18 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.learnin5.adapter.LessonAdapter
 import com.learnin5.model.Lesson
 import com.learnin5.model.User
 
 class MainActivity : AppCompatActivity() {
     
     private lateinit var currentUser: User
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var lessonAdapter: LessonAdapter
+    private var currentLessonIndex = 0
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         )
         
         setupUI()
+        setupRecyclerView()
         loadSampleData()
     }
     
@@ -38,6 +45,21 @@ class MainActivity : AppCompatActivity() {
             // Navigate to quiz activity
             // startActivity(Intent(this, QuizActivity::class.java))
         }
+    }
+    
+    private fun setupRecyclerView() {
+        recyclerView = findViewById(R.id.lessons_container)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        
+        // Create a simple adapter for now
+        lessonAdapter = LessonAdapter(emptyList()) { lesson ->
+            // Handle lesson click
+            println("Clicked on lesson: ${lesson.title}")
+        }
+        recyclerView.adapter = lessonAdapter
+        
+        // Setup swipe detection
+        SwipeHelper(recyclerView)
     }
     
     private fun loadSampleData() {
@@ -69,18 +91,32 @@ class MainActivity : AppCompatActivity() {
                 duration = "5 min",
                 difficulty = "Medium",
                 category = "Finance"
+            ),
+            Lesson(
+                id = "lesson_4",
+                title = "Nutrition Basics",
+                topic = "Health",
+                content = "Good nutrition is essential for maintaining health and preventing disease. A balanced diet includes fruits, vegetables, whole grains, lean proteins, and healthy fats. Proper hydration and portion control are also important components of good nutrition.",
+                duration = "5 min",
+                difficulty = "Easy",
+                category = "Health"
+            ),
+            Lesson(
+                id = "lesson_5",
+                title = "Quantum Computing Fundamentals",
+                topic = "Technology",
+                content = "Quantum computing uses quantum bits (qubits) that can exist in multiple states simultaneously, unlike classical bits that are either 0 or 1. This allows quantum computers to solve certain problems exponentially faster than classical computers.",
+                duration = "5 min",
+                difficulty = "Hard",
+                category = "Technology"
             )
         )
         
-        // Display lessons (this would normally be handled by an adapter)
-        displayLessons(sampleLessons)
-    }
-    
-    private fun displayLessons(lessons: List<Lesson>) {
-        // In a real implementation, this would populate the swipeable lesson cards
-        // For now, we'll just log the lessons
-        lessons.forEach { lesson ->
-            println("Lesson: ${lesson.title} - ${lesson.topic}")
+        // Update the adapter with sample lessons
+        lessonAdapter = LessonAdapter(sampleLessons) { lesson ->
+            // Handle lesson click
+            println("Clicked on lesson: ${lesson.title}")
         }
+        recyclerView.adapter = lessonAdapter
     }
 }

@@ -40,49 +40,13 @@
         android:layout_marginBottom="12dp" />
 
     <!-- Swipeable lesson cards container -->
-    <FrameLayout
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lessons_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@drawable/lesson_card_background"
-        android:layout_marginBottom="16dp">
-
-        <!-- Placeholder for lesson cards -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="16dp">
-
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/ic_book_open"
-                android:tint="@color/primary_color"
-                android:layout_marginBottom="16dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/swipe_to_start"
-                android:textSize="18sp"
-                android:textColor="@color/text_secondary"
-                android:gravity="center" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/swipe_instructions"
-                android:textSize="14sp"
-                android:textColor="@color/text_secondary"
-                android:gravity="center"
-                android:layout_marginTop="8dp" />
-
-        </LinearLayout>
-
-    </FrameLayout>
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/lesson_card_background" />
 
     <!-- Streak and quiz section -->
     <LinearLayout
