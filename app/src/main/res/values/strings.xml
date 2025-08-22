@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Learn in 5</string>
+    <string name="daily_feed">Daily Feed</string>
+    <string name="swipe_to_start">Swipe to start learning!</string>
+    <string name="take_quiz">Take Quiz</string>
+    <string name="day_streak">day streak</string>
+    <string name="quiz_title">Quick Quiz</string>
+    <string name="submit_answer">Submit Answer</string>
+    <string name="lesson_title">Lesson Title</string>
+    <string name="lesson_topic">Topic</string>
+    <string name="lesson_content">This is the lesson content that will be displayed here. It will contain interesting facts and information about the topic.</string>
+    <string name="duration_5_min">5 min</string>
+    <string name="difficulty_easy">Easy</string>
+</resources>
