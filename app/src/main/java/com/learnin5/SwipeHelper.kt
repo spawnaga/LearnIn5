@@ -7,16 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class SwipeHelper(private val recyclerView: RecyclerView) {
     
-    private val gestureDetector = GestureDetector(recyclerView.context, GestureListener())
-    
-    init {
-        recyclerView.setOnTouchListener { _, event ->
-            gestureDetector.onTouchEvent(event)
-            false
-        }
-    }
-    
-    private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
+    private val gestureDetector = GestureDetector(recyclerView.context, object : GestureDetector.SimpleOnGestureListener() {
         override fun onFling(
             e1: MotionEvent?,
             e2: MotionEvent?,
@@ -42,6 +33,13 @@ class SwipeHelper(private val recyclerView: RecyclerView) {
                 }
             }
             return false
+        }
+    })
+    
+    init {
+        recyclerView.setOnTouchListener { _, event ->
+            gestureDetector.onTouchEvent(event)
+            false
         }
     }
     
