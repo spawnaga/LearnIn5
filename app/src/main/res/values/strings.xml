@@ -2,6 +2,7 @@
     <string name="app_name">Learn in 5</string>
     <string name="daily_feed">Daily Feed</string>
     <string name="swipe_to_start">Swipe to start learning!</string>
+    <string name="swipe_instructions">Swipe left or right to navigate through lessons</string>
     <string name="take_quiz">Take Quiz</string>
     <string name="day_streak">day streak</string>
     <string name="quiz_title">Quick Quiz</string>

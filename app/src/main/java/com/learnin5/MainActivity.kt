@@ -2,6 +2,7 @@ package com.learnin5
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.learnin5.model.Lesson
 import com.learnin5.model.User
@@ -28,6 +29,11 @@ class MainActivity : AppCompatActivity() {
     
     private fun setupUI() {
         val btnTakeQuiz = findViewById<Button>(R.id.btn_take_quiz)
+        val tvStreakCount = findViewById<TextView>(R.id.tv_streak_count)
+        
+        // Set initial streak count
+        tvStreakCount.text = currentUser.streakCount.toString()
+        
         btnTakeQuiz.setOnClickListener {
             // Navigate to quiz activity
             // startActivity(Intent(this, QuizActivity::class.java))
