@@ -1,5 +1,6 @@
 package com.learnin5
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.learnin5.adapter.LessonAdapter
 import com.learnin5.model.Lesson
 import com.learnin5.model.User
+import com.learnin5.utils.AIContentProvider
 
 class MainActivity : AppCompatActivity() {
     
@@ -42,8 +44,10 @@ class MainActivity : AppCompatActivity() {
         tvStreakCount.text = currentUser.streakCount.toString()
         
         btnTakeQuiz.setOnClickListener {
-            // Navigate to quiz activity
-            // startActivity(Intent(this, QuizActivity::class.java))
+            // Navigate to quiz activity with animation
+            val intent = Intent(this, QuizActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
     }
     
@@ -57,9 +61,6 @@ class MainActivity : AppCompatActivity() {
             println("Clicked on lesson: ${lesson.title}")
         }
         recyclerView.adapter = lessonAdapter
-        
-        // Setup swipe detection
-        SwipeHelper(recyclerView)
     }
     
     private fun loadSampleData() {
@@ -112,11 +113,37 @@ class MainActivity : AppCompatActivity() {
             )
         )
         
+        // Demonstrate AI curation
+        val curatedLessons = AIContentProvider.generateCuratedLessons(currentUser, sampleLessons)
+        println("Curated lessons for ${currentUser.name}:")
+        curatedLessons.forEach { lesson ->
+            val relevanceScore = AIContentProvider.calculateRelevanceScore(currentUser, lesson)
+            println("- ${lesson.title} (${lesson.category}) - Score: ${String.format("%.2f", relevanceScore)}")
+        }
+        
         // Update the adapter with sample lessons
-        lessonAdapter = LessonAdapter(sampleLessons) { lesson ->
+        lessonAdapter = LessonAdapter(curatedLessons) { lesson ->
             // Handle lesson click
             println("Clicked on lesson: ${lesson.title}")
         }
         recyclerView.adapter = lessonAdapter
+    }
+    
+    // Method to navigate to next lesson with animation
+    private fun goToNextLesson() {
+        if (currentLessonIndex < (lessonAdapter.itemCount - 1)) {
+            currentLessonIndex++
+            // In a real implementation, this would animate the transition
+            println("Navigating to lesson $currentLessonIndex")
+        }
+    }
+    
+    // Method to navigate to previous lesson with animation
+    private fun goToPreviousLesson() {
+        if (currentLessonIndex > 0) {
+            currentLessonIndex--
+            // In a real implementation, this would animate the transition
+            println("Navigating to lesson $currentLessonIndex")
+        }
     }
 }
