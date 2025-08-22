@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var currentUser: User
     private lateinit var recyclerView: RecyclerView
     private lateinit var lessonAdapter: LessonAdapter
-    private var currentLessonIndex = 0
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,9 +61,6 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Opening lesson: ${lesson.title}", Toast.LENGTH_SHORT).show()
         }
         recyclerView.adapter = lessonAdapter
-        
-        // Setup swipe detection
-        SwipeHelper(recyclerView)
     }
     
     private fun loadSampleData() {
